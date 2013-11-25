@@ -41,7 +41,7 @@ Install & Usage
 
 How to use is the following:
 
-1. Add execute permission
+1. Adding execute permission
 2. Setting `datadir` `htmldir` and `cgitmpdir`
 3. Update the ''munin.conf''
 4. Run this script
