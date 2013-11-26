@@ -3,7 +3,7 @@
 ### config
 # target directory
 datadir="/var/lib/munin"
-htmldir="/var/www/munin"
+htmldir="/var/www/html/munin"
 cgitmpdir="$datadir/cgi-tmp"
 
 ### define
@@ -20,6 +20,11 @@ check_munin_process() {
     pcount=`ps aux | grep --color=none -E 'munin-updat[e]|munin-htm[l]' | wc -l`
     return $pcount
 }
+# simple check (Ubuntu or not)
+ubuntu=
+if [ -f "/etc/lsb-release" ];then
+    ubuntu=true
+fi
 
 ### execute
 if [  ! -d "$datadir" -o ! -d "$htmldir" -o ! -d "$cgitmpdir" ];then
@@ -101,7 +106,11 @@ while : ;do
                     mkdir $datadir/$new_g > /dev/null 2>&1
                     # data files
                     echo -e "\trename $old_g/$old_n $new_g/$new_n $datadir/$old_g/$old_n-*"
-                    rename $old_g/$old_n $new_g/$new_n $datadir/$old_g/$old_n-*
+                    if [ $ubuntu ];then
+                        rename "s,$old_g/$old_n,$new_g/$new_n," $datadir/$old_g/$old_n-*
+                    else
+                        rename $old_g/$old_n $new_g/$new_n $datadir/$old_g/$old_n-*
+                    fi
                 else
                     echo -e "\t$datadir/$old_g: \e[31mNo such file or directory\e[m"
                 fi

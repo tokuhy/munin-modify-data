@@ -50,7 +50,7 @@ It is run interactively.
 
 Environment is assumed the following.
 
-* CentOS6(RHEL6) 64bit
+* CentOS6(RHEL6) 64bit / Ubuntu
 * Munin2.0
 
 --
@@ -67,10 +67,10 @@ Environment is assumed the following.
 
 環境は
 
-* CentOS6(RHEL6) 64bit
+* CentOS6(RHEL6) 64bit / Ubuntu
 * Munin2.0系
 
-を想定しています。rename(1) コマンドをスクリプト内で使っていますが、Ubuntu だとコマンドの実装が違うとかいう話を聞いたのでそちらの動作確認はしていません。
+を想定しています。
 
 Author
 ------
