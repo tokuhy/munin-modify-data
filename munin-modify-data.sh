@@ -13,6 +13,9 @@ action=(
 "delete"
 "exit"
 )
+# dir owner/group
+dir_o=`stat --format %U $htmldir`
+dir_g=`stat --format %U $htmldir`
 # select menu prompt
 PS3="Enter menu number> "
 # function
@@ -104,6 +107,7 @@ while : ;do
                 echo "rename data files:"
                 if [ -d "$datadir/$old_g" ];then
                     mkdir $datadir/$new_g > /dev/null 2>&1
+                    chown $dir_o:$dir_g $datadir/$new_g
                     # data files
                     echo -e "\trename $old_g/$old_n $new_g/$new_n $datadir/$old_g/$old_n-*"
                     if [ $ubuntu ];then
@@ -118,6 +122,7 @@ while : ;do
                 echo "move html files:"
                 if [ -d "$htmldir/$old_g/$old_n" ];then
                     mkdir $htmldir/$new_g > /dev/null 2>&1
+                    chown $dir_o:$dir_g $htmldir/$new_g
                     # html files
                     echo -e "\t$htmldir/$old_g/$old_n/ >>> $htmldir/$new_g/$new_n/"
                     mv -f $htmldir/$old_g/$old_n $htmldir/$new_g/$new_n
